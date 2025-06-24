@@ -1,6 +1,5 @@
-// src/context/AuthContext.jsx
 import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import api from "../utils/api"; 
 
 export const AuthContext = createContext();
 
@@ -11,8 +10,8 @@ export const AuthProvider = ({ children }) => {
   // Auto-load user if token exists
   useEffect(() => {
     if (token) {
-      axios
-        .get("http://localhost:8080/api/auth/me", {
+      api
+        .get("/auth/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -28,13 +27,13 @@ export const AuthProvider = ({ children }) => {
 
   // Register
   const register = async (userData) => {
-    const res = await axios.post("http://localhost:8080/api/auth/register", userData);
+    const res = await api.post("/auth/register", userData);
     return res.data;
   };
 
   // Login
   const login = async (credentials) => {
-    const res = await axios.post("http://localhost:8080/api/auth/login", credentials);
+    const res = await api.post("/auth/login", credentials);
     const { token, user } = res.data;
     setToken(token);
     setUser(user);

@@ -4,7 +4,7 @@ import {
   Box, Button, FormControl, FormLabel, Input, Heading, VStack, useToast
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api"; // Use your centralized API instance
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +22,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/register", formData);
+      // Use the api instance, which handles baseURL and token
+      const res = await api.post("/auth/register", formData);
       toast({
         title: "Registration Successful",
         description: res.data.message,
