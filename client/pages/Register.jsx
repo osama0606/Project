@@ -4,7 +4,7 @@ import {
   Box, Button, FormControl, FormLabel, Input, Heading, VStack, useToast
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import api from "../api"; // Use your centralized API instance
+import api from "../utils/api"; 
 
 const Register = () => {
   const [formData, setFormData] = useState({
